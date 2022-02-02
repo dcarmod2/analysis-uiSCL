@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Project-Map > HopLayer renders correctly 1`] = `
+<ForwardRef(Leaflet(GeoJSON))
+  color="blue"
+  data={
+    {
+  "type": "FeatureCollection",
+  "features": []
+}
+  }
+  key="00000000-0000-0000-0000-000000000000"
+  zIndex={10000}
+/>
+`;

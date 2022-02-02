@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component EditBundle snapshot(mount) 1`] = `
+<EditBundle
+  bundleProjects={Array []}
+>
+  <ForwardRef
+    spacing={8}
+  >
+    <Flex
+      direction="column"
+    >
+      <Box
+        display="flex"
+        flexDirection="column"
+      >
+        <div
+          className="css-j7qwjs"
+        >
+          <FormControl
+            key=".0"
+            mb={null}
+          >
+            <Box
+              mb={null}
+              role="group"
+            >
+              <div
+                className="css-0"
+                role="group"
+              >
+                <FormLabel
+                  htmlFor="selectBundle"
+                >
+                  <Box
+                    as="label"
+                    display="inline-block"
+                    fontSize="md"
+                    fontWeight="medium"
+                    htmlFor="selectBundle"
+                    opacity="1"
+                    pb="4px"
+                    pr="12px"
+                    textAlign="left"
+                    verticalAlign="middle"
+                  >
+                    <label
+                      className="css-176s5fq"
+                      htmlFor="selectBundle"
+                    >
+                      or select an existing one
+                    </label>
+                  </Box>
+                </FormLabel>
+                <div>
+                  <ForwardRef
+                    getOptionLabel={[Function]}
+                    getOptionValue={[Function]}
+                    inputId="selectBundle"
+                    onChange={[Function]}
+                    options={
+                      Array [
+                        Object {
+                          "_id": "1",
+                          "accessGroup": "accessGroupName",
+                          "centerLat": 38.90124,
+                          "centerLon": -77.015615,
+                          "createdAt": "2017-11-08T12:30:50.133Z",
+                          "createdBy": "person@gmail.com",
+                          "errorCode": "",
+                          "feeds": Array [],
+                          "name": "Mock Bundle",
+                          "nonce": "12345",
+                          "regionId": "1",
+                          "serviceEnd": "2018-09-28",
+                          "serviceStart": "2018-09-27",
+                          "status": "DONE",
+                          "totalFeeds": 0,
+                          "updatedAt": "2017-11-08T12:31:19.602Z",
+                          "updatedBy": "person@gmail.com",
+                        },
+                      ]
+                    }
+                  >
+                    <ReactSelect
+                      getOptionLabel={[Function]}
+                      getOptionValue={[Function]}
+                      innerRef={null}
+                      inputId="selectBundle"
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "_id": "1",
+                            "accessGroup": "accessGroupName",
+                            "centerLat": 38.90124,
+                            "centerLon": -77.015615,
+                            "createdAt": "2017-11-08T12:30:50.133Z",
+                            "createdBy": "person@gmail.com",
+                            "errorCode": "",
+                            "feeds": Array [],
+                            "name": "Mock Bundle",
+                            "nonce": "12345",
+                            "regionId": "1",
+                            "serviceEnd": "2018-09-28",
+                            "serviceStart": "2018-09-27",
+                            "status": "DONE",
+                            "totalFeeds": 0,
+                            "updatedAt": "2017-11-08T12:31:19.602Z",
+                            "updatedBy": "person@gmail.com",
+                          },
+                        ]
+                      }
+                      styles={
+                        Object {
+                          "control": [Function],
+                          "menu": [Function],
+                          "option": [Function],
+                        }
+                      }
+                    >
+                      <div
+                        className="ReactSelectMock"
+                      />
+                    </ReactSelect>
+                  </ForwardRef>
+                </div>
+              </div>
+            </Box>
+          </FormControl>
+        </div>
+      </Box>
+    </Flex>
+  </ForwardRef>
+</EditBundle>
+`;

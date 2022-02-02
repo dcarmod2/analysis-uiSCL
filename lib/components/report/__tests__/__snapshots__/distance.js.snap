@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Report > Distance renders correctly 1`] = `
+<span>
+  2 km
+   (
+  1.2 mi
+  )
+</span>
+`;

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Project-Map > DrawPolygon works correctly 1`] = `
+<ForwardRef(Leaflet(FeatureGroup))>
+  <Component
+    draw={
+      Object {
+        "circle": false,
+        "circlemarker": false,
+        "marker": false,
+        "polygon": true,
+        "polyline": false,
+        "rectangle": false,
+      }
+    }
+    onCreated={[Function]}
+    position="bottomright"
+  />
+</ForwardRef(Leaflet(FeatureGroup))>
+`;

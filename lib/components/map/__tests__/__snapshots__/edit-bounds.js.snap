@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Components > Map > Edit Bounds renders correctly 1`] = `
+<Fragment>
+  <ForwardRef(Leaflet(Marker))
+    draggable={true}
+    onDragEnd={[Function]}
+    position={
+      Object {
+        "lat": 38,
+        "lng": -77,
+      }
+    }
+  />
+  <ForwardRef(Leaflet(Marker))
+    draggable={true}
+    onDragEnd={[Function]}
+    position={
+      Object {
+        "lat": 39,
+        "lng": -77,
+      }
+    }
+  />
+  <ForwardRef(Leaflet(Marker))
+    draggable={true}
+    onDragEnd={[Function]}
+    position={
+      Object {
+        "lat": 39,
+        "lng": -76,
+      }
+    }
+  />
+  <ForwardRef(Leaflet(Marker))
+    draggable={true}
+    onDragEnd={[Function]}
+    position={
+      Object {
+        "lat": 38,
+        "lng": -76,
+      }
+    }
+  />
+  <ForwardRef(Leaflet(Rectangle))
+    bounds={
+      Object {
+        "_northEast": Object {
+          "lat": 39,
+          "lng": -76,
+        },
+        "_southWest": Object {
+          "lat": 38,
+          "lng": -77,
+        },
+      }
+    }
+    weight={2}
+  />
+</Fragment>
+`;

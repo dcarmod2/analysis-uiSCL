@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`actions > index > bundle addBundle should work 1`] = `
+Object {
+  "type": "add bundle",
+}
+`;
+
+exports[`actions > index > bundle setBundle should work 1`] = `
+Object {
+  "type": "set bundle",
+}
+`;
+
+exports[`actions > index > feed setFeeds should work 1`] = `
+Object {
+  "type": "set feeds",
+}
+`;
+
+exports[`actions > index > login / logout login should work 1`] = `
+Object {
+  "type": "log in",
+}
+`;
+
+exports[`actions > index > user setUser should work 1`] = `
+Object {
+  "type": "set user",
+}
+`;

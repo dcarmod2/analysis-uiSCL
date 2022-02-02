@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component WithContext(WithMap(AddTripPatternLayer)) snapshot(shallow) 1`] = `
+<Map>
+  <AddTripPatternLayer
+    bidirectional={false}
+    segments={
+      Array [
+        Object {
+          "fromStopId": "1",
+          "geometry": Object {
+            "coordinates": Array [
+              Array [
+                -122.0246,
+                36.9707,
+              ],
+              Array [
+                -122.0279,
+                37.049,
+              ],
+              Array [
+                -121.9799,
+                37.2299,
+              ],
+              Array [
+                -121.9445,
+                37.324,
+              ],
+              Array [
+                -121.936,
+                37.353,
+              ],
+              Array [
+                -121.924,
+                37.365,
+              ],
+            ],
+            "type": "LineString",
+          },
+          "spacing": 3000,
+          "stopAtEnd": false,
+          "stopAtStart": false,
+          "toStopId": null,
+        },
+      ]
+    }
+  />
+</Map>
+`;

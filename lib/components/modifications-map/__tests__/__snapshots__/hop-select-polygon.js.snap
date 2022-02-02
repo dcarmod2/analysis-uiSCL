@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component WithContext(WithMap(HopSelectPolygon)) snapshot(shallow) 1`] = `
+<Map>
+  <HopSelectPolygon
+    allStops={Array []}
+    hopStops={Array []}
+    selectHops={[MockFunction]}
+  />
+</Map>
+`;

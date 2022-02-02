@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component OpportunityDatasetSelector snapshot(mount) 1`] = `
+<OpportunityDatasetSelector>
+  <ForwardRef
+    getOptionLabel={[Function]}
+    getOptionValue={[Function]}
+    inputId="select-opportunity-dataset"
+    isClearable={true}
+    isDisabled={false}
+    isLoading={false}
+    name="select-opportunity-dataset"
+    onChange={[Function]}
+    options={
+      Array [
+        Object {
+          "_id": "Workers_total",
+          "name": "Workers total",
+          "sourceName": "lodes-data-2014",
+        },
+      ]
+    }
+  >
+    <ReactSelect
+      getOptionLabel={[Function]}
+      getOptionValue={[Function]}
+      innerRef={
+        Object {
+          "current": undefined,
+        }
+      }
+      inputId="select-opportunity-dataset"
+      isClearable={true}
+      isDisabled={false}
+      isLoading={false}
+      name="select-opportunity-dataset"
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "_id": "Workers_total",
+            "name": "Workers total",
+            "sourceName": "lodes-data-2014",
+          },
+        ]
+      }
+      styles={
+        Object {
+          "control": [Function],
+          "menu": [Function],
+          "option": [Function],
+        }
+      }
+    >
+      <div
+        className="ReactSelectMock"
+      />
+    </ReactSelect>
+  </ForwardRef>
+</OpportunityDatasetSelector>
+`;

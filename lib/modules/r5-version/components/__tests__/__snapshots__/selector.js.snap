@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component SelectR5Version snapshot(mount) 1`] = `
+<SelectR5Version>
+  <FormControl>
+    <Box
+      role="group"
+    >
+      <div
+        className="css-0"
+        role="group"
+      >
+        <Flex
+          justify="space-between"
+        >
+          <Box
+            display="flex"
+            justifyContent="space-between"
+          >
+            <div
+              className="css-gg4vpm"
+            >
+              <FormLabel
+                htmlFor="select-r5-version"
+              >
+                <Box
+                  as="label"
+                  display="inline-block"
+                  fontSize="md"
+                  fontWeight="medium"
+                  htmlFor="select-r5-version"
+                  opacity="1"
+                  pb="4px"
+                  pr="12px"
+                  textAlign="left"
+                  verticalAlign="middle"
+                >
+                  <label
+                    className="css-176s5fq"
+                    htmlFor="select-r5-version"
+                  >
+                    Routing engine
+                  </label>
+                </Box>
+              </FormLabel>
+              <div />
+            </div>
+          </Box>
+        </Flex>
+        <div>
+          <Creatable
+            formatCreateLabel={[Function]}
+            inputId="select-r5-version"
+            isValidNewOption={[Function]}
+            name="select-r5-version"
+            onChange={[Function]}
+            options={
+              Array [
+                Object {
+                  "label": "v6.0.1 (recommended)",
+                  "value": "v6.0.1",
+                },
+                Object {
+                  "label": <span
+                    style={
+                      Object {
+                        "textDecoration": "line-through",
+                      }
+                    }
+                  />,
+                  "value": undefined,
+                },
+              ]
+            }
+            styles={
+              Object {
+                "control": [Function],
+                "menu": [Function],
+                "option": [Function],
+              }
+            }
+            value={
+              Object {
+                "label": <span
+                  style={
+                    Object {
+                      "textDecoration": "line-through",
+                    }
+                  }
+                />,
+                "value": undefined,
+              }
+            }
+          >
+            <div
+              className="ReactSelect/Creatable"
+            />
+          </Creatable>
+        </div>
+        <Alert
+          status="warning"
+        >
+          <Box
+            alignItems="center"
+            bg="orange.100"
+            display="flex"
+            overflow="hidden"
+            pb={3}
+            pl={4}
+            position="relative"
+            pr={4}
+            pt={3}
+            role="alert"
+          >
+            <div
+              className="css-elg79j"
+              role="alert"
+            >
+              An updated version of the routing engine is available. Changing versions should improve performance but may change analysis results.
+            </div>
+          </Box>
+        </Alert>
+      </div>
+    </Box>
+  </FormControl>
+</SelectR5Version>
+`;

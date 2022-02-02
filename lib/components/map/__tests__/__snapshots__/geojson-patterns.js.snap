@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Components > Map > GeoJSON-Patterns renders correctly 1`] = `
+<KeyedGeoJSON
+  color="blue"
+  data={
+    {
+  "type": "FeatureCollection",
+  "features": []
+}
+  }
+  weight={3}
+/>
+`;

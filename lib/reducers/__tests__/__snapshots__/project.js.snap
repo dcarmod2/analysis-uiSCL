@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reducers > project should handle add bundle 1`] = `
+Object {
+  "feeds": Array [],
+  "modifications": Array [],
+  "projects": Array [],
+}
+`;
+
+exports[`reducers > project should handle add project 1`] = `
+Object {
+  "feeds": Array [],
+  "modifications": Array [],
+  "projects": Array [
+    Object {
+      "_id": "1",
+    },
+  ],
+}
+`;
+
+exports[`reducers > project should handle default state 1`] = `
+Object {
+  "feeds": Array [],
+  "modifications": Array [],
+  "projects": Array [],
+}
+`;
+
+exports[`reducers > project should handle delete bundle 1`] = `
+Object {
+  "bundles": Array [
+    Object {
+      "_id": "1",
+    },
+  ],
+}
+`;
+
+exports[`reducers > project should handle delete modification 1`] = `
+Object {
+  "modifications": Array [],
+}
+`;
+
+exports[`reducers > project should handle delete project 1`] = `
+Object {
+  "projects": Array [],
+}
+`;
+
+exports[`reducers > project should handle log out 1`] = `
+Object {
+  "feeds": Array [],
+  "modifications": Array [],
+  "projects": Array [],
+}
+`;
+
+exports[`reducers > project should handle set bundle 1`] = `
+Object {
+  "bundles": Array [
+    Object {
+      "_id": "1",
+    },
+  ],
+  "currentProject": Object {},
+}
+`;
+
+exports[`reducers > project should handle set bundles 1`] = `
+Object {
+  "currentProject": Object {
+    "bundleId": "1",
+  },
+}
+`;
+
+exports[`reducers > project should handle set feeds 1`] = `
+Object {
+  "feeds": Array [
+    Object {
+      "_id": "1",
+    },
+  ],
+  "modifications": Array [],
+  "projects": Array [],
+}
+`;
+
+exports[`reducers > project should handle set modification 1`] = `
+Object {
+  "feeds": Array [],
+  "modifications": Array [
+    Object {
+      "_id": "1",
+      "type": "adjust-dwell-time",
+    },
+  ],
+  "projects": Array [],
+}
+`;
+
+exports[`reducers > project should handle set modifications 1`] = `
+Object {
+  "feeds": Array [],
+  "modifications": Array [
+    Object {
+      "_id": "1",
+      "type": "adjust-dwell-time",
+    },
+  ],
+  "projects": Array [],
+}
+`;
+
+exports[`reducers > project should handle set project 1`] = `
+Object {
+  "bundles": Array [
+    Object {
+      "_id": "1",
+    },
+  ],
+  "projects": Array [
+    Object {
+      "_id": "1",
+      "bundleId": "1",
+    },
+  ],
+}
+`;
+
+exports[`reducers > project should handle set projects 1`] = `
+Object {
+  "feeds": Array [],
+  "modifications": Array [],
+  "projects": Array [
+    Object {
+      "_id": "1",
+    },
+  ],
+}
+`;
+
+exports[`reducers > project should handle show variant 1`] = `
+Object {
+  "modifications": Array [
+    Object {
+      "_id": "1",
+      "type": "adjust-dwell-time",
+      "variants": Array [],
+    },
+  ],
+}
+`;

@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Components > Modification > Variants 1`] = `
+<ForwardRef
+  spacing={4}
+>
+  <Heading
+    size="md"
+  >
+    Active in scenarios
+  </Heading>
+  <ForwardRef
+    spacing={2}
+  >
+    <Checkbox
+      fontWeight="normal"
+      isChecked={true}
+      key="0-a"
+      name="a"
+      onChange={[Function]}
+      value={0}
+      wordBreak="break-all"
+    >
+      1
+      . 
+      a
+    </Checkbox>
+    <Checkbox
+      fontWeight="normal"
+      isChecked={false}
+      key="1-b"
+      name="b"
+      onChange={[Function]}
+      value={1}
+      wordBreak="break-all"
+    >
+      2
+      . 
+      b
+    </Checkbox>
+  </ForwardRef>
+</ForwardRef>
+`;
