@@ -215,39 +215,6 @@ export default function CreateBundle() {
             <TabPanel>
               {!reuseOsm && (
                 <Stack spacing={4} pt={4}>
-                  <Heading size='sm'>
-                    {message('bundle.osmconvertDescription')}
-                    <DocsLink
-                      ml={1}
-                      to='/prepare-inputs#preparing-the-osm-data'
-                    />
-                  </Heading>
-
-                  <Code>
-                    {message('bundle.osmConvertCommand', {
-                      north: bounds.north,
-                      south: bounds.south,
-                      east: bounds.east,
-                      west: bounds.west
-                    })}
-                  </Code>
-
-                  <Heading size='sm'>
-                    {message('bundle.osmosisDescription')}
-                    <DocsLink
-                      ml={1}
-                      to='/prepare-inputs#preparing-the-osm-data'
-                    />
-                  </Heading>
-                  <Code>
-                    {message('bundle.osmosisCommand', {
-                      north: bounds.north,
-                      south: bounds.south,
-                      east: bounds.east,
-                      west: bounds.west
-                    })}
-                  </Code>
-
                   <FormControl isRequired>
                     <FormLabel htmlFor='osm'>
                       {message('bundle.osm.uploadNewLabel')}
