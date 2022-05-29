@@ -37,6 +37,7 @@ import {CutoffSlider, PercentileSlider} from './results-sliders'
 import SinglePointSettings from './single-point-settings'
 import StackedPercentileSelector from './stacked-percentile-selector'
 import {activeOpportunityDataset} from 'lib/modules/opportunity-datasets/selectors'
+import fpGet from 'lodash/fp/get'
 
 /**
  * Hide the loading text from map components because it is awkward.
@@ -68,6 +69,8 @@ const P = {
   lg: 6
 }
 
+const selectSurface = fpGet('analysis.travelTimeSurface')
+
 export default function SinglePointAnalysis({
   bundles,
   projects,
@@ -95,6 +98,14 @@ export default function SinglePointAnalysis({
 
   const displayedDataIsCurrent =
     !profileRequestHasChanged && !isFetchingIsochrone
+
+  const surface = useSelector(selectSurface)
+  let popularStopString = ""
+  if (surface != null) {
+    for (const i in surface.popularStops) {
+      popularStopString += surface.popularStops[i] + "\n"
+    }
+  }
 
   /**
    * Set the origin and fetch if ready.
@@ -204,6 +215,9 @@ export default function SinglePointAnalysis({
           region={region}
           regionalAnalyses={regionalAnalyses}
         />
+
+      {popularStopString.length != 0 ? <h6 id="popularStops">{popularStopString}</h6> : null}
+      
       </InnerDock>
     </>
   )

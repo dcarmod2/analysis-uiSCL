@@ -109,7 +109,7 @@ function SelectedStops({selectedStops}) {
     <List styleType='disc'>
       {selectedStops.map((stop) => (
         <ListItem data-id={stop.stop_id} key={stop.stop_id}>
-          {stop.stop_name}
+          {stop.stop_name}: {stop.stop_id}
         </ListItem>
       ))}
     </List>

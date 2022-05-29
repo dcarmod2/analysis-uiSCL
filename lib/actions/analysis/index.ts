@@ -29,11 +29,10 @@ import selectMaxTripDurationMinutes from 'lib/selectors/max-trip-duration-minute
 //import origins from './kista_nowater_pairs.json'
 //import origins from './bike_full_boxed_pairs.json'
 //import origins from './stock_nowater_pairs_800.json'
-import origins from './stock_nowater_pairs_400_55.json'
+// import origins from './stock_nowater_pairs_400_55.json'
 const slide = 55;
 //import origins from './kista_nowater_pairs_centered.json'
 //import origins_cate from './origins_cate.json'
-
 
 export const setMaxTripDurationMinutes = createAction(
   'set max trip duration minutes'
@@ -198,7 +197,7 @@ export const fetchTravelTimeSurface = () => (dispatch, getState) => {
   })
 }
 
-export const fetchTTSAndDownload = () => (dispatch, getState) => {
+export const fetchTTSAndDownload = () => async (dispatch, getState) => {
   
   
   const state = getState()
@@ -231,27 +230,31 @@ export const fetchTTSAndDownload = () => (dispatch, getState) => {
       percentiles: TRAVEL_TIME_PERCENTILES
     }*/
   ]
+
+  // JSON.parse(fs.readFileSync(`./${requestsSettings[0].name}`))
+  const origins = await import(`./${requestsSettings[0].name}.json`).then(module => module.default);
+  console.log(origins);
   // Iterate over all origins 
   for (var j = 0; j < origins.pairs.length; j++) {
-  const origin = origins.pairs[j]
+    const origin = origins.pairs[j]
 
-  if (get(requestsSettings, '[0].projectId') != null) {
-    const finalSettings = copyRequestSettings
-      ? requestsSettings[0]
-      : requestsSettings[0]
-    profileRequests.push({
-      ...finalSettings,
-      fromLat: origin[1],//fromLonLat.lat,
-      fromLon: origin[0],//fromLonLat.lon,
-      destinationPointSetIds: isNotStep(finalSettings)
-        ? destinationPointSetIds
-        : [],
-      percentiles: TRAVEL_TIME_PERCENTILES,
-      projectId: requestsSettings[0].projectId,
-      variantIndex: requestsSettings[0].variantIndex
-    })
+    if (get(requestsSettings, '[0].projectId') != null) {
+      const finalSettings = copyRequestSettings
+        ? requestsSettings[0]
+        : requestsSettings[0]
+      profileRequests.push({
+        ...finalSettings,
+        fromLat: origin[1],//fromLonLat.lat,
+        fromLon: origin[0],//fromLonLat.lon,
+        destinationPointSetIds: isNotStep(finalSettings)
+          ? destinationPointSetIds
+          : [],
+        percentiles: TRAVEL_TIME_PERCENTILES,
+        projectId: requestsSettings[0].projectId,
+        variantIndex: requestsSettings[0].variantIndex
+      })
+    }
   }
-}
 
   // Store the request in local storage and to be compared with the results
   dispatch(storeRequestsSettings(profileRequests))
@@ -414,8 +417,9 @@ export const handleSurfaceAndDownload = (error, responses, state) => {
 downloadJson({
   data: toDownload,
   filename:
-    snakeCase(`isochrones start ${fromTime} end ${toTime} access ${access} slide ${slide}`) +
-    '.json'
+    // snakeCase(`isochrones start ${fromTime} end ${toTime} access ${access} slide ${slide}`) +
+    // '.json'
+    state.analysis.requestsSettings[0].name
 })
 
   return [

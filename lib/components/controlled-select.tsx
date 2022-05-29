@@ -33,6 +33,7 @@ export default memo<ControlledSelectProps & FormControlProps>(
       <FormControl isDisabled={isDisabled} isInvalid={input.isInvalid} {...p}>
         <FormLabel htmlFor={input.id}>{label}</FormLabel>
         <Select
+          id={input.id}
           inputId={input.id}
           isClearable={isClearable}
           isDisabled={isDisabled}
