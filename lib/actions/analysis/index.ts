@@ -233,7 +233,6 @@ export const fetchTTSAndDownload = () => async (dispatch, getState) => {
 
   // JSON.parse(fs.readFileSync(`./${requestsSettings[0].name}`))
   const origins = await import(`./${requestsSettings[0].name}.json`).then(module => module.default);
-  console.log(origins);
   // Iterate over all origins 
   for (var j = 0; j < origins.pairs.length; j++) {
     const origin = origins.pairs[j]
@@ -419,7 +418,7 @@ downloadJson({
   filename:
     // snakeCase(`isochrones start ${fromTime} end ${toTime} access ${access} slide ${slide}`) +
     // '.json'
-    state.analysis.requestsSettings[0].name
+    state.analysis.requestsSettings[0].name + '-' + fromTime + '-' + toTime
 })
 
   return [
@@ -428,8 +427,8 @@ downloadJson({
       ...surface.warnings,
       ...(comparisonSurface ? comparisonSurface.warnings : [])
     ]),
-    //setTravelTimeSurface(surface),
-    //setComparisonTravelTimeSurface(comparisonSurface),
+    // setTravelTimeSurface(surface),
+    // setComparisonTravelTimeSurface(comparisonSurface),
     setIsochroneFetchStatus(false)
     
   ]
