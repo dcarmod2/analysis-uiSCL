@@ -14,8 +14,20 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException, UnexpectedAlertPresentException, StaleElementReferenceException
 
-START_TIME = 21600
+### USING THE SCRIPT:
+# Update the constants to the appropriate variables before using,
+# namely PROJECT_NAME and PROJECT_ID. PROJECT_NAME is what you name the project and PROJECT_ID can be found in the URL 
+# when you are in the Analysis tab with the project selected as the primary project 
+
+# START_TIME can be changed if the script crashes in the middle of computing multiple time ranges
+# Script can be modified in the beginning of the main code in order to detect which files already exist 
+# to avoid recomputing files but is currently outdated 
+
+
+START_TIME = 21600 # seconds since midnight; 21600 is 6 am 
 WINDOW = 300
+PROJECT_NAME = "project"
+PROJECT_ID = "ID HERE"
 
 ANALYSIS_REQUEST = """
 {{
@@ -48,7 +60,7 @@ ANALYSIS_REQUEST = """
   "walkSpeed": 1.3888888888888888,
   "workerVersion": "v6.0.1",
   "variantIndex": -1,
-  "projectId": "629d96bd3f2cb76e0eb36a51",
+  "projectId": "{}",
   "bounds": {{
     "south": {},
     "west": {},
@@ -96,7 +108,7 @@ TEST_REQUEST = """
   "walkSpeed": 1.3888888888888888,
   "workerVersion": "v6.0.1",
   "variantIndex": -1,
-  "projectId": "629d96bd3f2cb76e0eb36a51",
+  "projectId": "{}",
   "fromLat": {},
   "fromLon": {},
   "recordTimes": true,
@@ -184,7 +196,7 @@ if __name__ == "__main__":
     driver.implicitly_wait(10)
     driver.find_element(by=By.XPATH, value='//button[text()="stockholm"]').click()
 
-    el = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH, '//div[@id="innerdock"]//button[text()="y"]')))
+    el = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH, '//div[@id="innerdock"]//button[text()="{}"]'.format(PROJECT_NAME))))
     el.click()
     removeModifications()
 
@@ -220,7 +232,7 @@ if __name__ == "__main__":
         safeClick('//div[@role="tablist"]//button[@title="Custom JSON editor"]')
         textArea = driver.find_element(by=By.ID, value="customProfileRequest")
         textArea.clear()
-        textArea.send_keys(ANALYSIS_REQUEST.format(minLat, minLon, maxLat, maxLon, centerLat, centerLon, name))
+        textArea.send_keys(ANALYSIS_REQUEST.format(PROJECT_ID, minLat, minLon, maxLat, maxLon, centerLat, centerLon, name))
         time.sleep(5)
         # projectLabel = driver.find_element(by=By.XPATH, value='//label[text()="Project"]')
         # driver.find_element(by=By.ID, value=projectLabel.get_attribute("for")).click()
@@ -251,7 +263,7 @@ if __name__ == "__main__":
         for _ in range(20):
             driver.find_element(by=By.XPATH, value='//textarea[@id="customProfileRequest"]').send_keys(Keys.COMMAND + "a")
             driver.find_element(by=By.XPATH, value='//textarea[@id="customProfileRequest"]').send_keys(Keys.DELETE)
-            driver.find_element(by=By.XPATH, value='//textarea[@id="customProfileRequest"]').send_keys(TEST_REQUEST.format(start_time, start_time+WINDOW, centerLat, centerLon, name))
+            driver.find_element(by=By.XPATH, value='//textarea[@id="customProfileRequest"]').send_keys(TEST_REQUEST.format(start_time, start_time+WINDOW, PROJECT_ID, centerLat, centerLon, name))
             start_time += WINDOW
             print(start_time)
             time.sleep(5)
