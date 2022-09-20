@@ -26,8 +26,8 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException,
 
 START_TIME = 21600 # seconds since midnight; 21600 is 6 am 
 WINDOW = 300
-PROJECT_NAME = "project"
-PROJECT_ID = "ID HERE"
+PROJECT_NAME = "default"
+PROJECT_ID = "631e1da5345cc2539e276854"
 
 ANALYSIS_REQUEST = """
 {{
@@ -77,11 +77,58 @@ ANALYSIS_REQUEST = """
 }}
 """
 
+# TEST_REQUEST = """
+# {{
+#   "accessModes": "WALK",
+#   "bikeSpeed": 4.166666666666667,
+#   "bikeTrafficStress": 4,
+#   "date": "2020-12-12",
+#   "decayFunction": {{
+#     "type": "step",
+#     "standardDeviationMinutes": 10,
+#     "widthMinutes": 10
+#   }},
+#   "destinationPointSetIds": [],
+#   "directModes": "WALK",
+#   "egressModes": "WALK",
+#   "fromTime": {},
+#   "maxBikeTime": 20,
+#   "maxRides": 4,
+#   "maxWalkTime": 20,
+#   "monteCarloDraws": 200,
+#   "percentiles": [
+#     5,
+#     25,
+#     50,
+#     75,
+#     95
+#   ],
+#   "toTime": {},
+#   "transitModes": "BUS,TRAM,RAIL,SUBWAY,FERRY,CABLE_CAR,GONDOLA,FUNICULAR",
+#   "walkSpeed": 1.3888888888888888,
+#   "workerVersion": "v6.0.1",
+#   "variantIndex": -1,
+#   "projectId": "{}",
+#   "fromLat": {},
+#   "fromLon": {},
+#   "recordTimes": true,
+#   "recordPaths": true,
+#   "toLat": 59.31834561522184,
+#   "toLon": 18.071908950805668,
+#   "name": "{}"
+# }}
+# """
 TEST_REQUEST = """
 {{
   "accessModes": "WALK",
   "bikeSpeed": 4.166666666666667,
   "bikeTrafficStress": 4,
+  "bounds": {{
+    "north": 59.45763913832078,
+    "west": 17.75115966796875,
+    "south": 59.19562559533593,
+    "east": 18.2208251953125
+  }},
   "date": "2020-12-12",
   "decayFunction": {{
     "type": "step",
@@ -91,7 +138,7 @@ TEST_REQUEST = """
   "destinationPointSetIds": [],
   "directModes": "WALK",
   "egressModes": "WALK",
-  "fromTime": {},
+  "fromTime": 25200,
   "maxBikeTime": 20,
   "maxRides": 4,
   "maxWalkTime": 20,
@@ -103,21 +150,26 @@ TEST_REQUEST = """
     75,
     95
   ],
-  "toTime": {},
+  "toTime": 32400,
   "transitModes": "BUS,TRAM,RAIL,SUBWAY,FERRY,CABLE_CAR,GONDOLA,FUNICULAR",
   "walkSpeed": 1.3888888888888888,
   "workerVersion": "v6.0.1",
   "variantIndex": -1,
-  "projectId": "{}",
   "fromLat": {},
   "fromLon": {},
   "recordTimes": true,
   "recordPaths": true,
   "toLat": 59.31834561522184,
   "toLon": 18.071908950805668,
-  "name": "{}"
+  "name": "{}",
+  "projectId": "{}"
 }}
 """
+
+"""
+{"accessModes":"WALK","bikeSpeed":4.166666666666667,"bikeTrafficStress":4,"date":"2020-12-12","decayFunction":{"type":"step","standardDeviationMinutes":10,"widthMinutes":10},"destinationPointSetIds":[],"directModes":"WALK","egressModes":"WALK","fromTime":25200,"maxBikeTime":20,"maxRides":4,"maxWalkTime":20,"monteCarloDraws":200,"percentiles":[5,25,50,75,95],"toTime":32400,"transitModes":"BUS,TRAM,RAIL,SUBWAY,FERRY,CABLE_CAR,GONDOLA,FUNICULAR","walkSpeed":1.3888888888888888,"workerVersion":"v6.0.1","variantIndex":-1,"projectId":"63262801794e73312149e3f4","bounds":{"north":59.45763913832078,"south":59.19562559533593,"east":18.2208251953125,"west":17.75115966796875},"fromLat":59.326632366828356,"fromLon":17.985992431640625}
+"""
+
 
 def removeStop(jsonString):
     safeClick('//button[text()="Create a modification"]')
@@ -198,86 +250,85 @@ if __name__ == "__main__":
 
     el = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH, '//div[@id="innerdock"]//button[text()="{}"]'.format(PROJECT_NAME))))
     el.click()
-    removeModifications()
+    # removeModifications()
 
-    
-    filenames = glob.glob("./lib/actions/analysis/stock_nowater_pairs_400_*.json")
-    for filename in filenames:
-        start_time = START_TIME
-        minLat, minLon, maxLat, maxLon = findCorners(filename)
-        name = filename.split("/")[-1].split(".json")[0]
-        if exists("./" + name + ".png"):
-            continue
-        centerLat = (minLat + maxLat) / 2
-        centerLon = (minLon + maxLon) / 2
-        print(name, minLat, minLon, maxLat, maxLon, centerLat, centerLon)
+    # filenames = glob.glob("./lib/actions/analysis/stock_nowater_pairs_400_*.json")
+    # for filename in filenames:
+    #     start_time = START_TIME
+    #     minLat, minLon, maxLat, maxLon = findCorners(filename)
+    #     name = filename.split("/")[-1].split(".json")[0]
+    #     if exists("./" + name + ".png"):
+    #         continue
+    #     centerLat = (minLat + maxLat) / 2
+    #     centerLon = (minLon + maxLon) / 2
+    #     print(name, minLat, minLon, maxLat, maxLon, centerLat, centerLon)
 
-        # Create new project 
-        # WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH, '//button[text()="Create new Project"]')))    
-        # driver.find_element(by=By.XPATH, value='//button[text()="Create new Project"]').click()
-        # nameLabel = driver.find_element(by=By.XPATH, value='//label[text()="Project name"]')
-        # driver.find_element(by=By.ID, value=nameLabel.get_attribute("for")).send_keys(name)
+    #     # Create new project 
+    #     # WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH, '//button[text()="Create new Project"]')))    
+    #     # driver.find_element(by=By.XPATH, value='//button[text()="Create new Project"]').click()
+    #     # nameLabel = driver.find_element(by=By.XPATH, value='//label[text()="Project name"]')
+    #     # driver.find_element(by=By.ID, value=nameLabel.get_attribute("for")).send_keys(name)
 
-        # driver.find_element(by=By.XPATH, value='//div[contains(@class, "indicatorContainer")]').click()
-        # driver.find_element(by=By.XPATH, value='//div[text()="y"]').click()
-        # driver.find_element(by=By.XPATH, value='//button[text()="Create"]').click()
-        # time.sleep(2)
+    #     # driver.find_element(by=By.XPATH, value='//div[contains(@class, "indicatorContainer")]').click()
+    #     # driver.find_element(by=By.XPATH, value='//div[text()="y"]').click()
+    #     # driver.find_element(by=By.XPATH, value='//button[text()="Create"]').click()
+    #     # time.sleep(2)
 
-        # Compute the most popular stop in this area 
-        safeClick('//div[@id="sidebar"]//div[@title="Analyze"]')
-        try:
-            safeClick('//div[@id="PrimaryAnalysisSettings"]//button[@title="expand"]')
-        except TimeoutException:
-            print("do nothing")
-        safeClick('//div[@role="tablist"]//button[@title="Custom JSON editor"]')
-        textArea = driver.find_element(by=By.ID, value="customProfileRequest")
-        textArea.clear()
-        textArea.send_keys(ANALYSIS_REQUEST.format(PROJECT_ID, minLat, minLon, maxLat, maxLon, centerLat, centerLon, name))
-        time.sleep(5)
-        # projectLabel = driver.find_element(by=By.XPATH, value='//label[text()="Project"]')
-        # driver.find_element(by=By.ID, value=projectLabel.get_attribute("for")).click()
-        # driver.find_element(by=By.XPATH, value='//div[@id="{}"]//div[text()="project"]'.format(projectLabel.get_attribute("for"))).click()
-        safeClick('//button[@title="Fetch results"]')
-        try:
-            WebDriverWait(driver,10).until(EC.presence_of_element_located((By.ID, 'popularStops')))    
-        except TimeoutException:
-            print("Skipping %s because no stops", name) # skip this region, as there are no stops in it 
-            continue
-        popularStops = driver.find_element(by=By.ID, value="popularStops").get_attribute("innerHTML").split("\n")
+    #     # Compute the most popular stop in this area 
+    #     safeClick('//div[@id="sidebar"]//div[@title="Analyze"]')
+    #     try:
+    #         safeClick('//div[@id="PrimaryAnalysisSettings"]//button[@title="expand"]')
+    #     except TimeoutException:
+    #         print("do nothing")
+    #     safeClick('//div[@role="tablist"]//button[@title="Custom JSON editor"]')
+    #     textArea = driver.find_element(by=By.ID, value="customProfileRequest")
+    #     textArea.clear()
+    #     textArea.send_keys(ANALYSIS_REQUEST.format(PROJECT_ID, minLat, minLon, maxLat, maxLon, centerLat, centerLon, name))
+    #     time.sleep(5)
+    #     # projectLabel = driver.find_element(by=By.XPATH, value='//label[text()="Project"]')
+    #     # driver.find_element(by=By.ID, value=projectLabel.get_attribute("for")).click()
+    #     # driver.find_element(by=By.XPATH, value='//div[@id="{}"]//div[text()="project"]'.format(projectLabel.get_attribute("for"))).click()
+    #     safeClick('//button[@title="Fetch results"]')
+    #     try:
+    #         WebDriverWait(driver,10).until(EC.presence_of_element_located((By.ID, 'popularStops')))    
+    #     except TimeoutException:
+    #         print("Skipping %s because no stops", name) # skip this region, as there are no stops in it 
+    #         continue
+    #     popularStops = driver.find_element(by=By.ID, value="popularStops").get_attribute("innerHTML").split("\n")
 
-        # Using these stops, create modification to remove them
-        safeClick('//div[@id="sidebar"]//div[@title="Edit Modifications"]')
-        for stopString in popularStops:
-            if len(stopString) > 0:
-                removeStop(stopString)
-        safeClick('//button[@aria-label="Show all modifications"]')
+    #     # Using these stops, create modification to remove them
+    #     safeClick('//div[@id="sidebar"]//div[@title="Edit Modifications"]')
+    #     for stopString in popularStops:
+    #         if len(stopString) > 0:
+    #             removeStop(stopString)
+    #     safeClick('//button[@aria-label="Show all modifications"]')
 
-        safeClick('//div[@id="sidebar"]//div[@title="Test"]')
-        # Run test with this to download the isochrone and take a screenshot 
-        safeClick('//div[@id="PrimaryAnalysisSettings"]//button[@title="expand"]')
-        scenarioLabel = driver.find_element(by=By.XPATH, value='//label[text()="Scenario"]')
-        safeClick('//div[@id="{}"]'.format(scenarioLabel.get_attribute("for")))
-        safeClick('//div[@id="{}"]//div[text()="Default"]'.format(scenarioLabel.get_attribute("for")))
+    #     safeClick('//div[@id="sidebar"]//div[@title="Test"]')
+    #     # Run test with this to download the isochrone and take a screenshot 
+    #     safeClick('//div[@id="PrimaryAnalysisSettings"]//button[@title="expand"]')
+    #     scenarioLabel = driver.find_element(by=By.XPATH, value='//label[text()="Scenario"]')
+    #     safeClick('//div[@id="{}"]'.format(scenarioLabel.get_attribute("for")))
+    #     safeClick('//div[@id="{}"]//div[text()="Default"]'.format(scenarioLabel.get_attribute("for")))
 
-        safeClick('//div[@role="tablist"]//button[@title="Custom JSON editor"]')
-        for _ in range(20):
-            driver.find_element(by=By.XPATH, value='//textarea[@id="customProfileRequest"]').send_keys(Keys.COMMAND + "a")
-            driver.find_element(by=By.XPATH, value='//textarea[@id="customProfileRequest"]').send_keys(Keys.DELETE)
-            driver.find_element(by=By.XPATH, value='//textarea[@id="customProfileRequest"]').send_keys(TEST_REQUEST.format(start_time, start_time+WINDOW, PROJECT_ID, centerLat, centerLon, name))
-            start_time += WINDOW
-            print(start_time)
-            time.sleep(5)
-            safeClick('//button[@title="Fetch results"]')
-            # time.sleep(120)
-            try:
-                WebDriverWait(driver,120).until(EC.presence_of_element_located((By.XPATH, '//button[@title="Fetch results"]')))   
-            except TimeoutException:
-                time.sleep(600)
-                WebDriverWait(driver,480).until(EC.presence_of_element_located((By.XPATH, '//button[@title="Fetch results"]')))   
-            driver.save_screenshot("{}-{}.png".format(name, start_time))
+    #     safeClick('//div[@role="tablist"]//button[@title="Custom JSON editor"]')
+    #     for _ in range(20):
+    #         driver.find_element(by=By.XPATH, value='//textarea[@id="customProfileRequest"]').send_keys(Keys.COMMAND + "a")
+    #         driver.find_element(by=By.XPATH, value='//textarea[@id="customProfileRequest"]').send_keys(Keys.DELETE)
+    #         driver.find_element(by=By.XPATH, value='//textarea[@id="customProfileRequest"]').send_keys(TEST_REQUEST.format(start_time, start_time+WINDOW, PROJECT_ID, centerLat, centerLon, name))
+    #         start_time += WINDOW
+    #         print(start_time)
+    #         time.sleep(5)
+    #         safeClick('//button[@title="Fetch results"]')
+    #         # time.sleep(120)
+    #         try:
+    #             WebDriverWait(driver,120).until(EC.presence_of_element_located((By.XPATH, '//button[@title="Fetch results"]')))   
+    #         except TimeoutException:
+    #             time.sleep(600)
+    #             WebDriverWait(driver,480).until(EC.presence_of_element_located((By.XPATH, '//button[@title="Fetch results"]')))   
+    #         driver.save_screenshot("{}-{}.png".format(name, start_time))
 
-        # Remove modifications
-        safeClick('//div[@id="sidebar"]//div[@title="Edit Modifications"]')
-        removeModifications()
+    #     # Remove modifications
+    #     safeClick('//div[@id="sidebar"]//div[@title="Edit Modifications"]')
+    #     removeModifications()
 
     driver.quit()
