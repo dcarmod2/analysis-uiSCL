@@ -66,3 +66,12 @@ cypress.env.json
 .idea
 
 .env
+
+
+# Processing isochone large files
+
+CarCohomology/
+RobustIsochrones/
+KeplerViz/
+output_slide_hole_*.txt
+sparsemat_slide_hole_trans_*.txt
