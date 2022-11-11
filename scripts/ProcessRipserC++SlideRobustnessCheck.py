@@ -334,9 +334,9 @@ def extract_pts(gens,ind,origins,point_origins):
 
 
 # for i in range(17,18):
-i = 4
-with open(f"output_slide_hole_{i}.txt","w+") as f:
-    p = subprocess.run(["../../ripser/ripser-representatives", "--format", "sparse" ,"--dim", "1", "--threshold", "100", f'sparsemat_slide_hole_trans_{i}.txt'], stdout=f)
+slide_num = 36
+with open(f"output_slide_hole_{slide_num}.txt","w+") as f:
+    p = subprocess.run(["../../ripser/ripser-representatives", "--format", "sparse" ,"--dim", "1", "--threshold", "100", f'sparsemat_slide_hole_trans_{slide_num}.txt'], stdout=f)
         
 
 
@@ -346,14 +346,12 @@ UNPROJECT='EPSG:4326'
 
 transit_isochrone_dir = 'RobustIsochrones/'
 car_isochrone_dir = 'SlideIsochronesCar/'
-# for i in trange(17,18):
-i = 4
-subdir = f'Slide_{i}/'
-graph_file = f'sparsemat_slide_hole_trans_{i}.txt'
-sample_isochrone = gpd.read_file(transit_isochrone_dir + subdir + f'isochrones_start_21900_end_22200_access_walk_slide_{i}.json')
+subdir = f'Slide_{slide_num}/'
+graph_file = f'sparsemat_slide_hole_trans_{slide_num}.txt'
+sample_isochrone = gpd.read_file(transit_isochrone_dir + f'stock_nowater_pairs_400_{slide_num}-25200-32400.json')
 origins = sample_isochrone[sample_isochrone['cutoff'] == 60].loc[:,['fromLon','fromLat']].values
 point_origins = [shapely.geometry.Point(x,y) for x,y in sample_isochrone[sample_isochrone['cutoff'] == 60].loc[:,['fromLon','fromLat']].values]
-transit_output_filename = f"output_slide_hole_{i}.txt"
+transit_output_filename = f"output_slide_hole_{slide_num}.txt"
 with open(transit_output_filename,'r') as f:
     lines = [line.strip().split(':') 
         for line in f.readlines()
@@ -392,7 +390,7 @@ for linepair in tqdm(lines):
 
     #print(gen_plus_birth)
 
-with open(f'CarCohomology/car_coho_slide_{i}.p','rb') as f:
+with open(f'CarCohomology/car_coho_slide_{slide_num}.p','rb') as f:
     carRips = pickle.load(f)
     
 coc_sets = [[set(x[:-1]) for x in y] for y in carRips['cocycles'][1]]
@@ -458,7 +456,7 @@ for tmpind,(ind,imp,birth,orig_death) in enumerate(sorted_allimpact[-50:-30]):
 for j,gentup in enumerate(mode_imb_allpers):
     max_gen = gentup[0]
     max_feat_pers_int = sorted([[get_loc_and_time_ints(x,start,window,origins,point_origins),get_loc_and_time_ints(y,start,window,origins,point_origins)] for x,y in gens1[max_gen]],key=lambda x: x[0][1])
-    with open(f"KeplerViz/CheckFeatSlide_{i}_gen_{j}.json","w+") as f:
+    with open(f"KeplerViz/CheckFeatSlide_{slide_num}_gen_{j}.json","w+") as f:
         f.write(json.dumps(cycle_to_geojson(max_feat_pers_int)))
         
 
@@ -471,13 +469,13 @@ for j,gentup in enumerate(mode_imb_allpers):
     geoj_dict = {'type':'FeatureCollection','features':[{'type':'Feature',
                                                             'geometry':feat}]}
                                     
-    with open(f"KeplerViz/CheckPolySlide_{i}_gen_{j}.json","w+") as f:
+    with open(f"KeplerViz/CheckPolySlide_{slide_num}_gen_{j}.json","w+") as f:
         f.write(json.dumps(geoj_dict))
                                     
 for j,gentup in enumerate(modified_gens):
     max_gen = gentup[0]
     max_feat_pers_int = sorted([[get_loc_and_time_ints(x,start,window,origins,point_origins),get_loc_and_time_ints(y,start,window,origins,point_origins)] for x,y in gens1[max_gen]],key=lambda x: x[0][1])
-    with open(f"KeplerViz/CheckModFeatSlide_{i}_gen_{j}.json","w+") as f:
+    with open(f"KeplerViz/CheckModFeatSlide_{slide_num}_gen_{j}.json","w+") as f:
         f.write(json.dumps(cycle_to_geojson(max_feat_pers_int)))
         
 for j,gentup in enumerate(modified_gens):
@@ -487,13 +485,13 @@ for j,gentup in enumerate(modified_gens):
     geoj_dict = {'type':'FeatureCollection','features':[{'type':'Feature',
                                                             'geometry':feat}]}
                                     
-    with open(f"KeplerViz/CheckModPolySlide_{i}_gen_{j}.json","w+") as f:
+    with open(f"KeplerViz/CheckModPolySlide_{slide_num}_gen_{j}.json","w+") as f:
         f.write(json.dumps(geoj_dict))
                                     
 for j,gentup in enumerate(mode_imb_allimpact):
     max_gen = gentup[0]
     max_feat_pers_int = sorted([[get_loc_and_time_ints(x,start,window,origins,point_origins),get_loc_and_time_ints(y,start,window,origins,point_origins)] for x,y in gens1[max_gen]],key=lambda x: x[0][1])
-    with open(f"KeplerViz/CheckImpactFeatSlide_{i}_gen_{j}.json","w+") as f:
+    with open(f"KeplerViz/CheckImpactFeatSlide_{slide_num}_gen_{j}.json","w+") as f:
         f.write(json.dumps(cycle_to_geojson(max_feat_pers_int)))
                                     
     
@@ -504,13 +502,13 @@ for j,gentup in enumerate(mode_imb_allimpact):
     feat = shapely.geometry.mapping(get_hull(gen,origins,point_origins))
     geoj_dict = {'type':'FeatureCollection','features':[{'type':'Feature',
                                                             'geometry':feat}]}
-    with open(f"KeplerViz/CheckImpactPolySlide_{i}_gen_{j}.json","w+") as f:
+    with open(f"KeplerViz/CheckImpactPolySlide_{slide_num}_gen_{j}.json","w+") as f:
         f.write(json.dumps(geoj_dict))
                                     
 for j,gentup in enumerate(modified_gens_impact):
     max_gen = gentup[0]
     max_feat_pers_int = sorted([[get_loc_and_time_ints(x,start,window,origins,point_origins),get_loc_and_time_ints(y,start,window,origins,point_origins)] for x,y in gens1[max_gen]],key=lambda x: x[0][1])
-    with open(f"KeplerViz/CheckModImpactFeatSlide_{i}_gen_{j}.json","w+") as f:
+    with open(f"KeplerViz/CheckModImpactFeatSlide_{slide_num}_gen_{j}.json","w+") as f:
         f.write(json.dumps(cycle_to_geojson(max_feat_pers_int)))
         
 for j,gentup in enumerate(modified_gens_impact):
@@ -520,7 +518,7 @@ for j,gentup in enumerate(modified_gens_impact):
     geoj_dict = {'type':'FeatureCollection','features':[{'type':'Feature',
                                                             'geometry':feat}]}
                                     
-    with open(f"KeplerViz/CheckModImpactPolySlide_{i}_gen_{j}.json","w+") as f:
+    with open(f"KeplerViz/CheckModImpactPolySlide_{slide_num}_gen_{j}.json","w+") as f:
         f.write(json.dumps(geoj_dict))
     
 gc.collect()

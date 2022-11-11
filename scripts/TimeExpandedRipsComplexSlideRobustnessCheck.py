@@ -99,25 +99,22 @@ def make_coo_matrix_nodelay(origins,point_origins,dfs,timeRange=15,maxTime=60,sa
 # #### For each subregion in stockholm, use isochrone data to make a sparse distance matrix representing travel times in the transit or car network. 
 # - depending on whether is looking at transit or car, lines should be commented/uncommented and directory names changed accordingly
 
-for iso_dir in natsorted([x for x in os.listdir('RobustIsochrones') if not x.startswith('.DS')]):
-    slide_num = iso_dir.split('_')[-1]
-    # if slide_num != '17':
-    #     continue
-    print(f"Starting on directory number {slide_num} of {len(os.listdir('RobustIsochrones'))}")
-    trans_files = sorted(['RobustIsochrones/'+iso_dir + '/' + x for x in os.listdir('RobustIsochrones/'+iso_dir) if not x.startswith('.DS')])
-    #car_files = sorted(['SlideIsochronesCar/'+iso_dir + '/' + x for x in os.listdir('SlideIsochronesCar/'+iso_dir)])
-    #bike_files = sorted([isochrone_dir + x for x in os.listdir(isochrone_dir) if x.endswith('bicycle.json')])
-    trans_gdfs = [gpd.read_file(file) for file in trans_files]
-    origins = sorted(set(trans_gdfs[0].loc[:,'origin']))
-    
-    trans_dfs = [x.set_index(['origin','cutoff']) for x in trans_gdfs]
-    #car_dfs = [x.set_index(['origin','cutoff']) for x in car_gdfs]
-    #bike_dfs = [x.set_index(['origin','cutoff']) for x in bike_gdfs]
-    for df in tqdm(trans_dfs):
-        df['geometry'] = df['geometry'].simplify(tolerance=0.005)
-        
-    point_origins = [shapely.geometry.Point(x,y) for x,y in trans_gdfs[0][trans_gdfs[0]['cutoff'] == 60].loc[:,['fromLon','fromLat']].values]
-    sparse_nodelay = make_coo_matrix_nodelay(origins,point_origins,trans_dfs,5,60,f"sparsemat_slide_hole_trans_{slide_num}.txt")
-    print(len(origins))
+# for file in natsorted([x for x in os.listdir('RobustIsochrones') if not x.startswith('.DS')]):
+
+
+slide_num = 38
+file = f"stock_nowater_pairs_400_{slide_num}-25200-32400.json"
+trans_gdfs = [gpd.read_file("RobustIsochrones/" + file)]
+origins = sorted(set(trans_gdfs[0].loc[:,'origin']))
+
+trans_dfs = [trans_gdfs[0].set_index(['origin','cutoff']) for _ in range(20)]
+#car_dfs = [x.set_index(['origin','cutoff']) for x in car_gdfs]
+#bike_dfs = [x.set_index(['origin','cutoff']) for x in bike_gdfs]
+for df in tqdm(trans_dfs):
+    df['geometry'] = df['geometry'].simplify(tolerance=0.005)
+
+point_origins = [shapely.geometry.Point(x,y) for x,y in trans_gdfs[0][trans_gdfs[0]['cutoff'] == 60].loc[:,['fromLon','fromLat']].values]
+sparse_nodelay = make_coo_matrix_nodelay(origins,point_origins,trans_dfs,5,60,f"sparsemat_slide_hole_trans_{slide_num}.txt")
+print(len(origins))
 
 gc.collect()
